@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/listViewFoundCard.dart';
+import 'package:lost_and_found/listViewLostCard.dart';
 
 void main() => runApp(MyApp());
 
@@ -76,11 +78,13 @@ class _MyHomePageState extends State<MyHomePage>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Image.asset('images/LostIcon.png', scale: 1.2),
+                      Image.asset('images/LostIcon.png', scale: 0.9),
+                      SizedBox(width: 10,),
                       Text(
                         "Lost",
                         style: TextStyle(
-                            color: Theme.of(context).textTheme.overline.color),
+                            color: Colors.white),
+                            textScaleFactor: 1.3,
                       ),
                     ],
                   ),
@@ -95,11 +99,13 @@ class _MyHomePageState extends State<MyHomePage>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Image.asset('images/FoundIcon.png', scale: 1.2),
+                      Image.asset('images/FoundIcon.png', scale: 0.9),
+                      SizedBox(width: 10,),
                       Text(
                         "Found",
                         style: TextStyle(
-                            color: Theme.of(context).textTheme.overline.color),
+                            color: Colors.white),
+                            textScaleFactor: 1.3,
                       ),
                     ],
                   ),
@@ -112,8 +118,8 @@ class _MyHomePageState extends State<MyHomePage>
       body: new TabBarView(
         controller: _controller,
         children: <Widget>[
-          new TabScreen("Lost Wale Items"),
-          new TabScreen("Found Wale Items"),
+          ListViewLostCard(),
+          ListViewFoundCard(),
         ],
       ),
       floatingActionButton: FloatingActionButton(onPressed: (){}),
