@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/onClickCard.dart';
 
 class FoundCard extends StatelessWidget {
   Color txtColor = Colors.white;
+  double brdrRadius = 8;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -32,7 +34,7 @@ class FoundCard extends StatelessWidget {
                       ),),
                   ],
                 ),
-                SizedBox(width: MediaQuery.of(context).size.width / 3.8,),
+                SizedBox(width: 50,),
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
@@ -60,58 +62,69 @@ class FoundCard extends StatelessWidget {
         SizedBox(height: 12),
         Align(
           alignment: Alignment.center,
-          child: Container(
-            color: Colors.red,
-            width: MediaQuery.of(context).size.width / 1.3,
-            height: MediaQuery.of(context).size.height / 4,
-            child: Stack(
-              children: <Widget>[
-                Center(
-                  child: Image.asset(
-                    'images/box.jpg',
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width / 1.3,
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      height: MediaQuery.of(context).size.height / 8,
-                      width: MediaQuery.of(context).size.width / 1.5,
-                      color: Color(0x00FFFFFF),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        textDirection: TextDirection.ltr,
-                        children: <Widget>[
-                          Text(
-                            'Pencil Box',
-                            style: TextStyle(
-                              color: txtColor,
-                              fontSize: 30,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'Found in Chemistry Lab under Table Loreum Ipsum ',
-                            style: TextStyle(
-                              color: txtColor,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ],
-                      ),
+          child: GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return OnClickCard();
+              }));
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width / 1.3,
+              height: MediaQuery.of(context).size.height / 4,
+              child: Stack(
+                children: <Widget>[
+                  Center(
+                    child: Image.asset(
+                      'images/box.jpg',
+                      fit: BoxFit.fill,
                     ),
                   ),
-                  decoration: BoxDecoration(
+                  Container(
+                    width: MediaQuery.of(context).size.width / 1.3,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        height: MediaQuery.of(context).size.height / 8,
+                        width: MediaQuery.of(context).size.width / 1.5,
+                        color: Color(0x00FFFFFF),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          textDirection: TextDirection.ltr,
+                          children: <Widget>[
+                            Text(
+                              'Pencil Box',
+                              style: TextStyle(
+                                color: txtColor,
+                                fontSize: 30,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              'Found in Chemistry Lab under Table Loreum Ipsum ',
+                              style: TextStyle(
+                                color: txtColor,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(brdrRadius),
                       gradient: LinearGradient(
                           colors: [Color(0xFFF99E4F), Color(0x00F99E4F)],
                           begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter)),
-                ),
-              ],
+                          end: Alignment.topCenter),
+                    ),
+                  ),
+                ],
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(brdrRadius),
+              ),
             ),
           ),
         ),

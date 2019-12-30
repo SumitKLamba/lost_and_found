@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         appBarTheme: AppBarTheme(color: Color(0xFF57606F)),
+        fontFamily: 'Raleway',
       ),
       home: MyHomePage(),
     );
@@ -78,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Image.asset('images/LostIcon.png', scale: 0.9),
+                      Image.asset('images/LostIcon.png', scale: 1.2),
                       SizedBox(width: 10,),
                       Text(
                         "Lost",
@@ -99,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Image.asset('images/FoundIcon.png', scale: 0.9),
+                      Image.asset('images/FoundIcon.png', scale: 1.2),
                       SizedBox(width: 10,),
                       Text(
                         "Found",
