@@ -34,7 +34,7 @@ class FoundCard extends StatelessWidget {
                       ),),
                   ],
                 ),
-                SizedBox(width: 50,),
+                Expanded(child: Container()),
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
@@ -128,6 +128,7 @@ class FoundCard extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(height: 15,),
       ],
     );
   }

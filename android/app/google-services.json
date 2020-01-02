@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "75629820197",
+    "firebase_url": "https://lost-and-found-79c8c.firebaseio.com",
+    "project_id": "lost-and-found-79c8c",
+    "storage_bucket": "lost-and-found-79c8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75629820197:android:ef6ef9c6d9cf408c7442cc",
+        "android_client_info": {
+          "package_name": "in.grevity.lost_and_found"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75629820197-7hadd2obr73o31mki3pbef22jdvu554p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzE0TymHvDwQRd4w3Afs-jxwWv__UG0zc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75629820197-7hadd2obr73o31mki3pbef22jdvu554p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

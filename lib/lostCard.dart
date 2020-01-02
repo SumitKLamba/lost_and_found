@@ -10,7 +10,7 @@ class LostCard extends StatelessWidget {
     return Column(
       children: <Widget>[
         SizedBox(
-          height: 30,
+          height: 15,
         ),
         Center(
           child: Container(
@@ -35,7 +35,7 @@ class LostCard extends StatelessWidget {
                       ),),
                   ],
                 ),
-                SizedBox(width: 50),
+                Expanded(child: Container()),
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
@@ -127,6 +127,7 @@ class LostCard extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(height: 15,),
       ],
     );
   }

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/dashboard.dart';
 import 'package:lost_and_found/main.dart';
 
 class OnClickCard extends StatefulWidget {
@@ -16,7 +17,7 @@ class _OnClickCardState extends State<OnClickCard>{
     return Scaffold(
         body: Stack(
         children: <Widget>[
-          MyApp(),
+          DashBoard(),
           Center(
               child: Container(
                 width: MediaQuery.of(context).size.width / 1.2,
