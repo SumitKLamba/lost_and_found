@@ -15,7 +15,10 @@ class MyApp extends StatelessWidget {
         floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: Color(0xFF57606F) ),
         fontFamily: 'Raleway',
       ),
-      home: LoginPage());
+      home: LoginPage(),
+    routes: <String, WidgetBuilder> {
+    '/dashboard': (BuildContext context) => new DashBoard(),},
+    );
   }
 }
 

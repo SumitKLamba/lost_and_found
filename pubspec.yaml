@@ -30,6 +30,7 @@ dev_dependencies:
   image_picker: ^0.6.2+3
   firebase_database: ^3.1.1
   firebase_auth: ^0.15.3
+  firebase_core:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
