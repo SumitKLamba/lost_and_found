@@ -7,13 +7,26 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:lost_and_found/dashboard.dart';
 
 import 'package:lost_and_found/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(color: Color(0xFF57606F)),
+        floatingActionButtonTheme:
+        FloatingActionButtonThemeData(backgroundColor: Color(0xFF57606F)),
+        fontFamily: 'Raleway',
+      ),
+      home: DashBoard(),
+      routes: <String, WidgetBuilder>{
+        '/dashboard': (BuildContext context) => new DashBoard(),
+      },
+    ),);
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
