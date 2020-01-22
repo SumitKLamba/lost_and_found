@@ -134,33 +134,13 @@ class _OnClickFABState extends State<OnClickFAB> {
                               color: Color(0x802D3E50),
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: _image == null && imageFile == null
+                            child: _image == null
                                 ? Align(
                                     alignment: Alignment.center,
                                     child: Container(
                                       child: Stack(
                                         children: <Widget>[
                                           showImage(),
-                                          RawMaterialButton(
-                                            fillColor: Color(0xFF2D3E50),
-                                            constraints: BoxConstraints(
-                                              minWidth: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  1.9,
-                                              minHeight: 50,
-                                            ),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    new BorderRadius.circular(
-                                                        8.0)),
-                                            child: Text(
-                                                'Click to add picture from gallery'),
-                                            onPressed: () {
-                                              pickImageFromGallery(
-                                                  ImageSource.gallery);
-                                            },
-                                          ),
                                         ],
                                       ),
                                     ),
@@ -169,16 +149,54 @@ class _OnClickFABState extends State<OnClickFAB> {
                         SizedBox(
                           height: 10,
                         ),
-                        RawMaterialButton(
-                          fillColor: Color(0xFF2D3E50),
-                          constraints: BoxConstraints(
-                            minWidth: MediaQuery.of(context).size.width / 1.9,
-                            minHeight: 50,
-                          ),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(8.0)),
-                          child: Text('Click to capture picture'),
-                          onPressed: getImage,
+                        Padding(
+                            padding: const EdgeInsets.only(left: 20.0, right: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                RawMaterialButton(
+                                  fillColor: Color(0xFF2D3E50),
+                                  constraints: BoxConstraints(
+                                    minWidth: MediaQuery.of(context).size.width / 3,
+                                    minHeight: 50,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: new BorderRadius.circular(8.0)),
+                                  child: Text('Capture Picture',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),),
+                                  onPressed: getImage,
+                                ),
+                                SizedBox(
+                                  height: 50,
+                                ),
+                                RawMaterialButton(
+                                  fillColor: Color(0xFF2D3E50),
+                                  constraints: BoxConstraints(
+                                    minWidth: MediaQuery.of(context)
+                                        .size
+                                        .width /
+                                        3,
+                                    minHeight: 50,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                      new BorderRadius.circular(
+                                          8.0)),
+                                  child: Text(
+                                      'Add Picture',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    pickImageFromGallery(
+                                        ImageSource.gallery);
+                                  },
+                                ),
+                              ],
+                            ),
                         ),
                         SizedBox(
                           height: 20,

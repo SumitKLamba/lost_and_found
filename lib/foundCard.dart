@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/onClickCard.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FoundCard extends StatelessWidget {
   Color txtColor = Colors.white;
@@ -38,7 +39,7 @@ class FoundCard extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
-                    onTap: (){},
+                    onTap: ()=> launch("tel://21213123123"),
                     child: Container(
                       height: 25,
                       width: 45,
