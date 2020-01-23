@@ -12,6 +12,7 @@ import 'package:lost_and_found/dashboard.dart';
 import 'package:lost_and_found/main.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
@@ -22,10 +23,7 @@ void main() {
         FloatingActionButtonThemeData(backgroundColor: Color(0xFF57606F)),
         fontFamily: 'Raleway',
       ),
-      home: DashBoard(),
-      routes: <String, WidgetBuilder>{
-        '/dashboard': (BuildContext context) => new DashBoard(),
-      },
+      home: await getLandingPage(),
     ),);
 
     // Verify that our counter starts at 0.
