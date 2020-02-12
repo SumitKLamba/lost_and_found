@@ -128,38 +128,76 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: Container(
+        color: Color(0xFF2D3E50),
+        child: ListView(
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: TextField(
-                decoration: InputDecoration(
-                    hintText: 'Enter Phone Number Eg. +910000000000'),
-                onChanged: (value) {
-                  this.phoneNo = value;
-                },
+            Center(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    height: MediaQuery.of(context).size.height/1.8,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Image.asset(
+                            'images/app_bar_icon.png',
+                            scale: 0.5,
+                        ),
+                        Text('!Found',
+                        style: TextStyle(
+                         fontSize: 34,
+                         color: Colors.white,
+                         fontWeight: FontWeight.w700,
+                        ),)
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Text(
+                    'Enter Phone Number ',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            const Radius.circular(45.0),
+                            ),
+                          ),
+                      hintText: 'Eg. +91XXXXXXXXXX'),
+                      onChanged: (value) {
+                        this.phoneNo = value;
+                      },
+                    ),
+                  ),
+                  (errorMessage != ''
+                      ? Text(
+                    errorMessage,
+                    style: TextStyle(color: Colors.red),
+                  )
+                      : Container()),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  RaisedButton(
+                    onPressed: () {
+                      verifyPhone();
+                    },
+                    child: Text('Verify'),
+                    textColor: Colors.white,
+                    elevation: 7,
+                    color: Colors.green,
+                  )
+                ],
               ),
             ),
-            (errorMessage != ''
-                ? Text(
-              errorMessage,
-              style: TextStyle(color: Colors.red),
-            )
-                : Container()),
-            SizedBox(
-              height: 10,
-            ),
-            RaisedButton(
-              onPressed: () {
-                verifyPhone();
-              },
-              child: Text('Verify'),
-              textColor: Colors.white,
-              elevation: 7,
-              color: Colors.blue,
-            )
           ],
         ),
       ),
