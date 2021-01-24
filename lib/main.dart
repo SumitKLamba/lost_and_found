@@ -11,6 +11,7 @@ Future<void> main() async {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        canvasColor: Color(0xFF2D3E50),
         appBarTheme: AppBarTheme(color: Color(0xFF57606F)),
         floatingActionButtonTheme:
             FloatingActionButtonThemeData(backgroundColor: Color(0xFF57606F)),

@@ -26,7 +26,7 @@ class LostCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('+918529772529',
+                    Text('+91XXXXXXXXXX',
                     style: TextStyle(
                       color: txtColor,
                     ),),

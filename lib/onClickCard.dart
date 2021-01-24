@@ -80,7 +80,7 @@ class _OnClickCardState extends State<OnClickCard>{
                         children: <Widget>[
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('+918529772529',
+                            child: Text('+91XXXXXXXXXX',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Color(0x8AFFFFFF),

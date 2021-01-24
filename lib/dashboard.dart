@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:lost_and_found/listViewFoundCard.dart';
 import 'package:lost_and_found/listViewLostCard.dart';
 import 'package:lost_and_found/onClickFAB.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class DashBoard extends StatefulWidget{
+class DashBoard extends StatefulWidget {
   @override
   _DashBoardState createState() => _DashBoardState();
 }
 
-class _DashBoardState extends State<DashBoard> with SingleTickerProviderStateMixin {
+class _DashBoardState extends State<DashBoard>
+    with SingleTickerProviderStateMixin {
   TabController _controller;
+  Color txtColor = Colors.white;
 
   @override
   void initState() {
@@ -51,7 +54,7 @@ class _DashBoardState extends State<DashBoard> with SingleTickerProviderStateMix
           )
         ]),
         bottom: TabBar(
-          indicator:  CustomTabIndicator(),
+          indicator: CustomTabIndicator(),
           controller: _controller,
           indicatorSize: TabBarIndicatorSize.tab,
           labelColor: Color(0xFFFFFFFF),
@@ -65,11 +68,12 @@ class _DashBoardState extends State<DashBoard> with SingleTickerProviderStateMix
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Image.asset('images/LostIcon.png', scale: 1.2),
-                      SizedBox(width: 10,),
+                      SizedBox(
+                        width: 10,
+                      ),
                       Text(
                         "Lost",
-                        style: TextStyle(
-                            color: Colors.white),
+                        style: TextStyle(color: Colors.white),
                         textScaleFactor: 1.3,
                       ),
                     ],
@@ -86,11 +90,12 @@ class _DashBoardState extends State<DashBoard> with SingleTickerProviderStateMix
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Image.asset('images/FoundIcon.png', scale: 1.2),
-                      SizedBox(width: 10,),
+                      SizedBox(
+                        width: 10,
+                      ),
                       Text(
                         "Found",
-                        style: TextStyle(
-                            color: Colors.white),
+                        style: TextStyle(color: Colors.white),
                         textScaleFactor: 1.3,
                       ),
                     ],
@@ -99,6 +104,58 @@ class _DashBoardState extends State<DashBoard> with SingleTickerProviderStateMix
               ),
             ),
           ],
+        ),
+      ),
+      drawer: Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: Color(
+              0xFF2D3E50), //This will change the drawer background to blue.
+          //other styles
+        ),
+        child: Drawer(
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Column(
+                  children: [
+                    Text('+91XXXXXXXXXX',style: TextStyle(
+                      color: txtColor,
+                    ),),
+                    SizedBox(height: 10),
+                    CircleAvatar(radius: 36,),
+                    SizedBox(height: 10),
+                    Container(
+                      height: 25,
+                      width: 45,
+                      child: Center(
+                        child: Text('Edit',
+                        style: TextStyle(
+                          color: txtColor,
+                        ),),
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                decoration: BoxDecoration(
+                  color: Color(0xFF57606F),
+                ),
+              ),
+              ListTile(
+                title: Text('LogOut',style: TextStyle(
+                  color: txtColor,
+                ),),
+                onTap: () {
+                  FirebaseAuth.instance.signOut();
+                },
+              ),
+            ],
+          ),
         ),
       ),
       body: new TabBarView(
@@ -110,7 +167,7 @@ class _DashBoardState extends State<DashBoard> with SingleTickerProviderStateMix
       ),
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
-          onPressed: (){
+          onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return OnClickFAB();
             }));
@@ -142,16 +199,13 @@ class TabScreen extends StatelessWidget {
 }
 
 class CustomTabIndicator extends Decoration {
-
   @override
   _CustomPainter createBoxPainter([VoidCallback onChanged]) {
     return new _CustomPainter(this, onChanged);
   }
-
 }
 
 class _CustomPainter extends BoxPainter {
-
   final CustomTabIndicator decoration;
 
   _CustomPainter(this.decoration, VoidCallback onChanged)
@@ -166,7 +220,7 @@ class _CustomPainter extends BoxPainter {
     final Paint paint = Paint();
     paint.color = Color(0x1F000000);
     paint.style = PaintingStyle.fill;
-    canvas.drawRRect(RRect.fromRectAndRadius(rect, Radius.circular(0.0)), paint);
+    canvas.drawRRect(
+        RRect.fromRectAndRadius(rect, Radius.circular(0.0)), paint);
   }
-
 }

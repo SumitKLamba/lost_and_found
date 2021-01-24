@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -8,12 +11,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   String phoneNo;
   String smsOTP;
   String verificationId;
   String errorMessage = '';
   FirebaseAuth _auth = FirebaseAuth.instance;
+  File _image;
 
   Future<void> verifyPhone() async {
     final PhoneCodeSent smsOTPSent = (String verId, [int forceCodeResend]) {
@@ -31,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
             this.verificationId = verId;
           },
           codeSent:
-          smsOTPSent, // WHEN CODE SENT THEN WE OPEN DIALOG TO ENTER OTP.
+              smsOTPSent, // WHEN CODE SENT THEN WE OPEN DIALOG TO ENTER OTP.
           timeout: const Duration(seconds: 20),
           verificationCompleted: (AuthCredential phoneAuthCredential) {
             print(phoneAuthCredential);
@@ -61,9 +64,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 (errorMessage != ''
                     ? Text(
-                  errorMessage,
-                  style: TextStyle(color: Colors.red),
-                )
+                        errorMessage,
+                        style: TextStyle(color: Colors.red),
+                      )
                     : Container())
               ]),
             ),
@@ -75,7 +78,8 @@ class _LoginPageState extends State<LoginPage> {
                   _auth.currentUser().then((user) {
                     if (user != null) {
                       Navigator.of(context).pop();
-                      Navigator.of(context).pushNamedAndRemoveUntil('/dashboard', (Route<dynamic> route) => false);
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/dashboard', (Route<dynamic> route) => false);
                     } else {
                       signIn();
                     }
@@ -93,11 +97,13 @@ class _LoginPageState extends State<LoginPage> {
         verificationId: verificationId,
         smsCode: smsOTP,
       );
-      final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
+      final FirebaseUser user =
+          (await _auth.signInWithCredential(credential)).user;
       final FirebaseUser currentUser = await _auth.currentUser();
       assert(user.uid == currentUser.uid);
       Navigator.of(context).pop();
-      Navigator.of(context).pushNamedAndRemoveUntil('/dashboard', (Route<dynamic> route) => false);
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          '/dashboard', (Route<dynamic> route) => false);
     } catch (e) {
       handleError(e);
     }
@@ -125,6 +131,54 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  _imgFromCamera() async {
+    File image = await ImagePicker.pickImage(
+        source: ImageSource.camera, imageQuality: 50);
+
+    setState(() {
+      _image = image;
+    });
+  }
+
+  _imgFromGallery() async {
+    File image = await ImagePicker.pickImage(
+        source: ImageSource.gallery, imageQuality: 50);
+
+    setState(() {
+      _image = image;
+    });
+  }
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Photo Library'),
+                      onTap: () {
+                        _imgFromGallery();
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text('Camera'),
+                    onTap: () {
+                      _imgFromCamera();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,26 +188,61 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
-                    height: MediaQuery.of(context).size.height/1.8,
+                    height: MediaQuery.of(context).size.height / 2.4,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Image.asset(
-                            'images/app_bar_icon.png',
-                            scale: 0.5,
+                          'images/app_bar_icon.png',
+                          scale: 0.5,
                         ),
-                        Text('!Found',
-                        style: TextStyle(
-                         fontSize: 34,
-                         color: Colors.white,
-                         fontWeight: FontWeight.w700,
-                        ),)
+                        Text(
+                          '!Found',
+                          style: TextStyle(
+                            fontSize: 34,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        )
                       ],
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  GestureDetector(
+                    onTap: () {
+                      _showPicker(context);
+                    },
+                    child: CircleAvatar(
+                      radius: 55,
+                      backgroundColor: Color(0xffFDCF09),
+                      child: _image != null
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(50),
+                              child: Image.file(
+                                _image,
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.fitHeight,
+                              ),
+                            )
+                          : Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(50)),
+                              width: 100,
+                              height: 100,
+                              child: Icon(
+                                Icons.camera_alt,
+                                color: Colors.grey[800],
+                              ),
+                            ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
                   Text(
                     'Enter Phone Number ',
                     style: TextStyle(
@@ -164,14 +253,14 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
                     child: TextField(
                       decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(45.0),
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(45.0),
                             ),
                           ),
-                      hintText: 'Eg. +91XXXXXXXXXX'),
+                          hintText: 'Eg. +91XXXXXXXXXX'),
                       onChanged: (value) {
                         this.phoneNo = value;
                       },
@@ -179,9 +268,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   (errorMessage != ''
                       ? Text(
-                    errorMessage,
-                    style: TextStyle(color: Colors.red),
-                  )
+                          errorMessage,
+                          style: TextStyle(color: Colors.red),
+                        )
                       : Container()),
                   SizedBox(
                     height: 40,
